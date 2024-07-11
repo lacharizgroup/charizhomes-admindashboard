@@ -28,7 +28,7 @@ const defaultValues = {
 
 function JwtSignInForm() {
 
-	const { signIn } = useJwtAuth();
+	const { signIn, isLoading } = useJwtAuth();
 	const { control, formState, handleSubmit, setValue, setError } = useForm({
 		mode: 'onChange',
 		defaultValues,
@@ -140,11 +140,11 @@ function JwtSignInForm() {
 				color="secondary"
 				className=" mt-16 w-full"
 				aria-label="Sign in"
-				disabled={_.isEmpty(dirtyFields) || !isValid}
+				disabled={_.isEmpty(dirtyFields) || !isValid || isLoading}
 				type="submit"
 				size="large"
 			>
-				Accept Invite
+				{isLoading ? "processing..." : "Sign in"}
 			</Button>
 		</form>
 	);
