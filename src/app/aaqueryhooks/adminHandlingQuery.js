@@ -1,0 +1,116 @@
+
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import config from './configServerRoutes/homesServerConfig';
+import { adminUserInviteAcceptanceEndpoint, getAllAdminsRoutes, getSingleAdminUser, recruitAdminUserEndpoint, } from './routestoserver';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+// import { resetForgotPassToken, setUserForgotPassCreedStorage } from './utils/opsUtils';
+
+
+
+export default function useGetAllAdminUsers() {
+  return useQuery(['__getAllAdmin'], getAllAdminsRoutes)
+}
+
+
+/***Get Admin By Its ID */
+export function useGetAdminById(params) {
+  // console.log('GETING SERVICETYPE-PARAMS', params)
+  // if(params === 'new'){
+  //   return
+  // }
+  return useQuery(
+      ['__getAllAdmin', params],
+      () => getSingleAdminUser(params),
+      {
+      
+          enabled: Boolean(params) || Boolean(params !== 'new') ,
+          
+          // staleTime: 5000,
+      }
+  )
+}
+
+
+/***Recruite New Admins */
+export function useAdminRecruitStaff() {
+  // const router = useRouter()
+  // const navigate = useNavigate()
+//   const queryClient = useQueryClient()
+  return useMutation(recruitAdminUserEndpoint, {
+      onSuccess: (data) => {
+        console.log("ADMIN-INVITATION-PAYLOAD", data?.data)
+        // return
+          if (data?.success && data?.data) {
+              window.alert('Admin Invite Sent, Acceptance Pending')
+            //   queryClient.invalidateQueries("__listById")
+            //   queryClient.refetchQueries()
+              return
+          } else if (data?.data?.error) {
+              // toast.error(data?.data?.error?.message)
+              console.log("In-BoundError:", data?.data?.error)
+              return
+          } else {
+              // toast.info('something unexpected happened')
+              return
+          }
+      },
+      onError: (error) => {
+          const {
+              response: { data },
+          } = error ?? {}
+   
+          // Array.isArray(data?.message)
+          //     ? data?.message?.map((m) => toast.error(m))
+          //     : toast.error(data?.message)
+
+          Array.isArray(data?.message)
+              ? data?.message?.map((m) => console.log(m))
+              : console.log(data?.message)
+      },
+  })
+}
+
+
+
+/***Admin Accept Invites */
+export function useAdminInvitationAcceptance() {
+    // const router = useRouter()
+    const navigate = useNavigate()
+    // const queryClient = useQueryClient()
+    return useMutation(adminUserInviteAcceptanceEndpoint, {
+        onSuccess: (data) => {
+          console.log("ADMIN-ACCEPT-INVITATION-PAYLOAD", data?.data)
+        //    return
+            if (data?.data?.success && data?.data?.adminuser) {
+                window.alert('Invitation Accepted, Welcome Onboard, Please Log in.')
+                navigate('/sign-in')
+                return
+            } else if (data?.data?.error) {
+
+                console.log("In-BoundError000:", data?.data?.error)
+                // toast.error(data?.data?.error?.message)
+                console.log("In-BoundError:", data?.data?.error?.message)
+                return
+            } else {
+                // toast.info('something unexpected happened')
+                return
+            }
+        },
+        onError: (error) => {
+            onsole.log("In-BoundError222:", error)
+            const {
+                response: { data },
+            } = error ?? {}
+     
+            // Array.isArray(data?.message)
+            //     ? data?.message?.map((m) => toast.error(m))
+            //     : toast.error(data?.message)
+  
+            Array.isArray(data?.message)
+                ? data?.message?.map((m) => console.log(m))
+                : console.log(data?.message)
+        },
+    })
+  }
+
