@@ -2,8 +2,11 @@ import axios from "axios";
 import homesServerConfig from "./configServerRoutes/homesServerConfig";
 import { getAdminAccessToken } from "./utils/opsUtils";
 import UseJwtAuth from "../auth/services/jwt/useJwtAuth";
+import config from '../auth/services/jwt/jwtAuthConfig';
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
-// const API_BASE_URL = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}`
+// const API_BASE_URL = `${process.env.API_BASE_URL}`
 //https://sea-turtle-app-c6p3o.ondigitalocean.app/listing/chariz-my-property
 
 // const API_BASE_URL = `http://localhost:8007`;
@@ -51,6 +54,7 @@ export function AuthApi() {
         // logOutUser();
         // signOut();
         // window.location.reload()
+        logOutAdmin()
 
         return Promise.reject({
           status: 401,
@@ -69,17 +73,21 @@ export function AuthApi() {
         });
       }
 
+      toast.error(error?.response && error?.response?.data?.message
+        ? error?.response?.data?.message
+        : error?.message)
+
       console.log(
         error?.response && error?.response?.data?.message
           ? error?.response?.data?.message
           : error?.message
       );
 
-      alert(
-        error?.response && error?.response?.data?.message
-          ? error?.response?.data?.message
-          : error?.message
-      );
+      // alert(
+      //   error?.response && error?.response?.data?.message
+      //     ? error?.response?.data?.message
+      //     : error?.message
+      // );
 
       return Promise.reject({
         status: error.response?.status,
@@ -108,6 +116,19 @@ export const userResetPasswordWithCode = (formData) =>  Api().post(`${homesServe
  */
 export const getAllUsers = () =>  {
   return AuthApi().get(`${homesServerConfig.getAllUsers}`)
+};
+
+//Recruit new Admins
+export const andminCreateNewUserEndpoint = (newUserData) =>  {
+  // console.log("Recruit DATA", newUserData)
+  return AuthApi().post(`${homesServerConfig.recruitNewUserAccounts}`, newUserData)
+};
+
+
+//Activate New user account 
+export const andminActivateNewUserEndpoint = (newUserData) =>  {
+  // console.log("Recruit DATA", newUserData) 
+  return AuthApi().post(`${homesServerConfig.activateNewUserAccounts}`, newUserData)
 };
 
 
@@ -157,6 +178,11 @@ export const getSinglePropertyListing = (listingId) =>  {
 //Approve Listing
 export const approvePropertyListing = (listingId) =>  {
   return AuthApi().put(`${homesServerConfig.approveListings}/${listingId}`)
+};
+
+//Dis-Approve Listing
+export const disApprovePropertyListingEndpoint = (listingId) =>  {
+  return AuthApi().put(`${homesServerConfig.disapproveListings}/${listingId}`)
 };
 
 /***===========================================================================================
@@ -230,8 +256,20 @@ export const deletePropertyTypesEndpoint = (propertyTypeId) =>  {
 //
 export const logOutAdmin = () => {
   // Api().post(`${CONTROL_API_ENDPOINTS.ADMIN_LOGIN}`, formData);
-  const ok = true;
-  return ok;
+  // const ok = true;
+  // return ok;
+
+  // localStorage.removeItem('jwt_is_authStatus')  //removing config-auth status
+  localStorage?.setItem(config.authStatus, 'configuring');
+  localStorage?.removeItem(config.tokenStorageKey);
+  localStorage?.removeItem(config.isAuthenticatedStatus);
+
+  // removeUserCredentialsStorage()
+  Cookies.remove(config.userCredentials);
+			Cookies.remove('jwt_auth_credentials');
+
+		window.location.reload()
+
 };
 
 /***========================================

@@ -94,10 +94,10 @@ function UsersHeader() {
 					variant="contained"
 					color="secondary"
 					component={NavLinkAdapter}
-					to="new/edit"
+					to="new/create"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-					<span className="hidden sm:flex mx-8">Add</span>
+					<span className="hidden sm:flex mx-8">Add | Unboard User</span>
 				</Button>
 			</div>
 		</div>

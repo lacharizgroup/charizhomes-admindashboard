@@ -1,9 +1,11 @@
 
 import { useMutation, useQuery } from 'react-query';
 import config from './configServerRoutes/homesServerConfig';
-import { getAllUsers, userForgotPassword, userResetPasswordWithCode } from './routestoserver';
+import { andminActivateNewUserEndpoint, andminCreateNewUserEndpoint, getAllUsers, userForgotPassword, userResetPasswordWithCode } from './routestoserver';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { setCreateNewUserAccount } from './utils/opsUtils';
 // import { resetForgotPassToken, setUserForgotPassCreedStorage } from './utils/opsUtils';
 
 
@@ -12,6 +14,87 @@ export default function useGetAllUsers() {
   return useQuery(['__getAllUsers'], getAllUsers)
 }
 
+
+
+/***Recruite New User Accounts */
+export function useAdminCreateNewUser() {
+  const navigate = useNavigate()
+  return useMutation(andminCreateNewUserEndpoint, {
+      onSuccess: (data) => {
+        console.log("User-INVITATION-PAYLOAD", data?.data)
+        // return
+          if (data?.data?.success && data?.data?.activation_token) {
+            setCreateNewUserAccount(data?.data?.activation_token)
+            navigate('/users/user/authorize/activate')
+            toast.success(data?.data?.message)
+              return
+          } else if (data?.data?.error) {
+              // toast.error(data?.data?.error?.message)
+              console.log("In-BoundError:", data?.data?.error)
+              return
+          } else {
+              toast.info('something unexpected happened')
+              return
+          }
+      },
+      onError: (error) => {
+          const {
+              response: { data },
+          } = error ?? {}
+   
+          // Array.isArray(data?.message)
+          //     ? data?.message?.map((m) => toast.error(m))
+          //     : toast.error(data?.message)
+
+          Array.isArray(data?.message)
+              ? data?.message?.map((m) => toast.error(m))
+              : toast.error(data?.message)
+      },
+  })
+}
+
+
+
+/***Recruite New User Accounts */
+export function useActivateNewUserByAdmin() {
+  const navigate = useNavigate()
+  return useMutation(andminActivateNewUserEndpoint, {
+      onSuccess: (data) => {
+        // console.log("User-INVITATION-PAYLOAD", data?.data)
+        // return
+          if (data?.data?.success && data?.data?.user) {
+            setCreateNewUserAccount(data?.data?.activation_token)
+            navigate('/users/user')
+            toast.success(data?.data?.message)
+            
+              return
+          } else if (data?.data?.error) {
+              toast.error(data?.data?.error?.response && error?.response?.data?.message
+                ? error?.response?.data?.message
+                : error?.message)
+              console.log("In-BoundError:", data?.data?.error)
+              return
+          } else {
+              toast.info('something unexpected happened')
+              return
+          }
+      },
+      onError: (error) => {
+          const {
+              response: { data },
+          } = error ?? {}
+   
+          // Array.isArray(data?.message)
+          //     ? data?.message?.map((m) => toast.error(m))
+          //     : toast.error(data?.message)
+          console.log("INSIDE ERROR BLOCK", data)
+
+          Array.isArray(data?.message)
+              ? data?.message?.map((m) => toast.error(m))
+              : toast.error(data?.message)
+      },
+  })
+}
 
 // export function useStudentForgotPass() {
 //   const navigate = useNavigate()

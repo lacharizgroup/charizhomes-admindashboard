@@ -32,6 +32,8 @@ const ContactModel = (data) =>
 		birthday: '',
 		address: '',
 		notes: '',
+		email: '',
+		phone: '',
 		tags: []
 	});
 export default ContactModel;

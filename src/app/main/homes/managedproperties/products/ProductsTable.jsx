@@ -14,7 +14,7 @@ import useGetAllListings from 'src/app/aaqueryhooks/listingssHandlingQuery';
 
 function ProductsTable() {
 	
-	const { data: products, isLoading } = useGetECommerceProductsQuery();
+	// const { data: products, isLoading } = useGetECommerceProductsQuery();
 	const [removeProducts] = useDeleteECommerceProductsMutation();
 
 	const {data:listingData, isLoading:listingIsLoading} = useGetAllListings()
@@ -302,6 +302,22 @@ function ProductsTable() {
 	// }
 	if (listingIsLoading) {
 		return <FuseLoading />;
+	}
+	// if(!listingData?.data?.listings){
+	// 	return <></>
+	// }
+
+	if (!listingData?.data?.listings) {
+		return (
+			<div className="flex flex-1 items-center justify-center h-full">
+				<Typography
+					color="text.secondary"
+					variant="h5"
+				>
+					There are no listings!
+				</Typography>
+			</div>
+		);
 	}
 
 	return (

@@ -80,12 +80,7 @@ const schema = z.object({
 
 
 export const roleset = [
-	{
-	  role: "Super_Admin",
-	  // icon: TbBeach,
-	//   description: "This property is close to the beach",
-	},
-	{
+		{
 		role: "Admin",
 		// icon: TbBeach,
 	  //   description: "This property is close to the beach",

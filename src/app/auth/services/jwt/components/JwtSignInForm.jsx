@@ -140,11 +140,13 @@ function JwtSignInForm() {
 				color="secondary"
 				className=" mt-16 w-full"
 				aria-label="Sign in"
+				//|| isLoading
 				disabled={_.isEmpty(dirtyFields) || !isValid || isLoading}
 				type="submit"
 				size="large"
 			>
 				{isLoading ? "processing..." : "Sign in"}
+				{/* Sign in */}
 			</Button>
 		</form>
 	);

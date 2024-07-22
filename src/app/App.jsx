@@ -1,3 +1,5 @@
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import FuseLayout from '@fuse/core/FuseLayout';
 import FuseTheme from '@fuse/core/FuseTheme';
 import { SnackbarProvider } from 'notistack';
@@ -78,6 +80,21 @@ function App() {
 				</FuseTheme>
 			</CacheProvider>
 		</MockAdapterProvider>
+
+		<ToastContainer
+                    className="z-1000"
+                    // position="bottom-center"
+                    position="top-left"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                />
 		</QueryClientProvider>
 	);
 }

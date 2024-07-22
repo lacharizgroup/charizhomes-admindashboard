@@ -109,6 +109,13 @@ const navigationConfig = [
 				icon: 'heroicons-outline:clipboard-check',
 				url: '/property/managed-listings'
 			},
+			{
+				id: 'properties.users.managedlist',
+				title: 'Manage Users & Properties',
+				type: 'item',
+				icon: 'heroicons-outline:clipboard-check',
+				url: '/userlistings/managed-user-listings'
+			},
 			// {
 			// 	id: 'users.user',
 			// 	title: 'Uers',

@@ -13,14 +13,15 @@ import useGetAllUsers from 'src/app/aaqueryhooks/usersHandlingQuery';
  */
 function UsersList() {
 
-	const { data, isLoading } = useGetContactsListQuery();
+	// const { data, isLoading } = useGetContactsListQuery();
 	const {data:usresData, isLoading:usersIsLoading} = useGetAllUsers()
+
 	// const filteredData = useAppSelector(selectFilteredContactList(data));
 
 	// const groupedFilteredContacts = useAppSelector(selectGroupedFilteredContacts(filteredData));
 
 
-	// console.log("users-on-HOMES", usresData?.data?.userlist)
+	console.log("users-on-HOMES", usresData?.data?.userlist)
 	const filteredData = useAppSelector(selectFilteredContactList(usresData?.data?.userlist));
 
 	const groupedFilteredContacts = useAppSelector(selectGroupedFilteredContacts(filteredData));
@@ -51,6 +52,7 @@ function UsersList() {
 			animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
 			className="flex flex-col flex-auto w-full max-h-full"
 		>
+
 			{Object.entries(groupedFilteredContacts).map(([key, group]) => {
 				return (
 					<div

@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import UsersHeader from './UsersHeader';
+import StaffHeader from './StaffHeader';
 import UsersList from './UsersList';
 import { useGetContactsListQuery, useGetContactsCountriesQuery, useGetContactsTagsQuery } from './ContactsApi';
-import ContactsSidebarContent from './ContactsSidebarContent';
+import StaffContactsSidebarContent from './StaffContactsSidebarContent';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {
@@ -35,10 +35,10 @@ function ContactsApp() {
 
 	return (
 		<Root
-			header={<UsersHeader />}
+			header={<StaffHeader />}
 			content={<UsersList />}
 			ref={pageLayout}
-			rightSidebarContent={<ContactsSidebarContent />}
+			rightSidebarContent={<StaffContactsSidebarContent />}
 			rightSidebarOpen={rightSidebarOpen}
 			rightSidebarOnClose={() => setRightSidebarOpen(false)}
 			rightSidebarWidth={640}

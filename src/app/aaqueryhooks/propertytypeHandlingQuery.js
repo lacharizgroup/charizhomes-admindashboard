@@ -4,6 +4,7 @@ import config from './configServerRoutes/homesServerConfig';
 import {  createPropertyTypesEndpoint, deletePropertyTypesEndpoint, getAllPropertyTypesEndpoint, getSinglePropertyTypesEndpoint, updatePropertyTypesEndpoint,  } from './routestoserver';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 // import { resetForgotPassToken, setUserForgotPassCreedStorage } from './utils/opsUtils';
 
 
@@ -37,7 +38,7 @@ export function useCreatePropertyType() {
         onSuccess: (data) => {
 
             if (data?.data?.success  && data?.data?.propertytype ) {
-              window.alert('property type created successfully' )
+              toast.success('property type created successfully' )
                 // window.alert(data?.data?.message )
                 navigate(`/types/propertytypes`)
              
@@ -45,34 +46,28 @@ export function useCreatePropertyType() {
                
             } 
             else if (data?.data?.error){
-                window.alert(data?.data?.error?.message)
+              toast.error(data?.data?.error?.response && error?.response?.data?.message
+                ? error?.response?.data?.message
+                : error?.message)
+                // window.alert(data?.data?.error?.message)
                 return;
               
             }else{
-                window.alert('something unexpected happened')
+                toast.info('something unexpected happened')
                 return;
             }
         },
         onError: (error) => {
-          console.log("ForgotPASS22", error)
-        //   console.log("LoginError2211", JSON.stringify(error?.response) )
-        //   console.log("LoginError2212", error)
-        //   toast.error(error)
-        // const {
-        //     response: { data  },
-        //   }: any = error ?? {};
-    
-        //   data?.message?.map((m : []) => toast.error(m))
         const {
             response: { data },
         }= error ?? {}
-        // Array.isArray(data?.message)
-        // ? data?.message?.map((m) => toast.error(m))
-        // : toast.error(data?.message)
-
         Array.isArray(data?.message)
-        ? data?.message?.map((m) => window.alert('error-message', m))
-        : window.alert(data?.message)
+        ? data?.message?.map((m) => toast.error(m))
+        : toast.error(data?.message)
+
+        // Array.isArray(data?.message)
+        // ? data?.message?.map((m) => window.alert('error-message', m))
+        // : window.alert(data?.message)
      
         },
     });
@@ -88,7 +83,7 @@ export function useCreatePropertyType() {
           onSuccess: (data) => {
   
               if (data?.data?.success  && data?.data?.propertytype ) {
-                window.alert('property type updated successfully' )
+                toast.success('property type updated successfully' )
                   // window.alert(data?.data?.message )
                   navigate(`/types/propertytypes`)
                
@@ -96,34 +91,28 @@ export function useCreatePropertyType() {
                  
               } 
               else if (data?.data?.error){
-                  window.alert(data?.data?.error?.message)
+                toast.error(data?.data?.error?.response && error?.response?.data?.message
+                  ? error?.response?.data?.message
+                  : error?.message)
+                  // window.alert(data?.data?.error?.message)
                   return;
                 
               }else{
-                  window.alert('something unexpected happened')
+                  toast.info('something unexpected happened')
                   return;
               }
           },
           onError: (error) => {
-            console.log("ForgotPASS22", error)
-          //   console.log("LoginError2211", JSON.stringify(error?.response) )
-          //   console.log("LoginError2212", error)
-          //   toast.error(error)
-          // const {
-          //     response: { data  },
-          //   }: any = error ?? {};
-      
-          //   data?.message?.map((m : []) => toast.error(m))
           const {
               response: { data },
           }= error ?? {}
-          // Array.isArray(data?.message)
-          // ? data?.message?.map((m) => toast.error(m))
-          // : toast.error(data?.message)
-  
           Array.isArray(data?.message)
-          ? data?.message?.map((m) => window.alert('error-message', m))
-          : window.alert(data?.message)
+          ? data?.message?.map((m) => toast.error(m))
+          : toast.error(data?.message)
+  
+          // Array.isArray(data?.message)
+          // ? data?.message?.map((m) => window.alert('error-message', m))
+          // : window.alert(data?.message)
        
           },
       });
@@ -138,7 +127,7 @@ export function useCreatePropertyType() {
             onSuccess: (data) => {
     
                 if (data?.data?.success  && data?.data?.propertytype ) {
-                  window.alert('property type deleted successfully' )
+                  toast.success('property type deleted successfully' )
                     // window.alert(data?.data?.message )
                     navigate(`/types/propertytypes`)
                  
@@ -146,34 +135,28 @@ export function useCreatePropertyType() {
                    
                 } 
                 else if (data?.data?.error){
-                    window.alert(data?.data?.error?.message)
+                  toast.error(data?.data?.error?.response && error?.response?.data?.message
+                    ? error?.response?.data?.message
+                    : error?.message)
+                    // window.alert(data?.data?.error?.message)
                     return;
                   
                 }else{
-                    window.alert('something unexpected happened')
+                    toast.info('something unexpected happened')
                     return;
                 }
             },
             onError: (error) => {
-              console.log("ForgotPASS22", error)
-            //   console.log("LoginError2211", JSON.stringify(error?.response) )
-            //   console.log("LoginError2212", error)
-            //   toast.error(error)
-            // const {
-            //     response: { data  },
-            //   }: any = error ?? {};
-        
-            //   data?.message?.map((m : []) => toast.error(m))
             const {
                 response: { data },
             }= error ?? {}
-            // Array.isArray(data?.message)
-            // ? data?.message?.map((m) => toast.error(m))
-            // : toast.error(data?.message)
-    
             Array.isArray(data?.message)
-            ? data?.message?.map((m) => window.alert('error-message', m))
-            : window.alert(data?.message)
+            ? data?.message?.map((m) => toast.error(m))
+            : toast.error(data?.message)
+    
+            // Array.isArray(data?.message)
+            // ? data?.message?.map((m) => window.alert('error-message', m))
+            // : window.alert(data?.message)
          
             },
         });

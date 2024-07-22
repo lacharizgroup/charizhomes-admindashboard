@@ -1,8 +1,10 @@
 import { lazy } from 'react';
-import ContactView from './contact/ContactView';
+import UserContactView from './contact/UserContactView';
 import ContactForm from './contact/ContactForm';
 // import { authRoles } from 'src/app/auth';
 import authRoles from '../../../auth/authRoles';
+import AddUserForm from './contact/AddUserForm';
+import ActivateUserForm from './contact/ActivateUserForm';
 
 const ContactsApp = lazy(() => import('./ContactsApp'));
 /**
@@ -16,17 +18,27 @@ const UsersAppConfig = {
 	},
 	// auth: authRoles.admin,
 	routes: [
+
 		{
 			path: 'users/user',
 			element: <ContactsApp />,
 			children: [
 				{
+					path: ':id/create',
+					element: <AddUserForm />
+				},
+				{
+					path: ':id/activate',
+					element: <ActivateUserForm />
+				},
+				{
 					path: ':id',
-					element: <ContactView />
+					element: <UserContactView />
 				},
 				{
 					path: ':id/edit',
-					element: <ContactForm />
+					// element: <ContactForm />
+					element:<ContactForm />
 				}
 			]
 		}

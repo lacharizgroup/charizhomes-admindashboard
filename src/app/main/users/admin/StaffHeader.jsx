@@ -15,7 +15,7 @@ import useGetAllAdminUsers from 'src/app/aaqueryhooks/adminHandlingQuery';
 /**
  * The contacts header.
  */
-function UsersHeader() {
+function StaffHeader() {
 	const dispatch = useAppDispatch();
 	const searchText = useAppSelector(selectSearchText);
 	// const { data, isLoading } = useGetContactsListQuery();
@@ -118,4 +118,4 @@ function UsersHeader() {
 }
 
 
-export default UsersHeader;
+export default StaffHeader;

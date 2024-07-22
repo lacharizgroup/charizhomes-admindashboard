@@ -4,6 +4,7 @@ import config from './configServerRoutes/homesServerConfig';
 import { adminUserInviteAcceptanceEndpoint, getAllAdminsRoutes, getSingleAdminUser, recruitAdminUserEndpoint, } from './routestoserver';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 // import { resetForgotPassToken, setUserForgotPassCreedStorage } from './utils/opsUtils';
 
 
@@ -15,10 +16,6 @@ export default function useGetAllAdminUsers() {
 
 /***Get Admin By Its ID */
 export function useGetAdminById(params) {
-  // console.log('GETING SERVICETYPE-PARAMS', params)
-  // if(params === 'new'){
-  //   return
-  // }
   return useQuery(
       ['__getAllAdmin', params],
       () => getSingleAdminUser(params),
@@ -34,7 +31,7 @@ export function useGetAdminById(params) {
 
 /***Recruite New Admins */
 export function useAdminRecruitStaff() {
-  // const router = useRouter()
+ 
   // const navigate = useNavigate()
 //   const queryClient = useQueryClient()
   return useMutation(recruitAdminUserEndpoint, {
@@ -42,16 +39,18 @@ export function useAdminRecruitStaff() {
         console.log("ADMIN-INVITATION-PAYLOAD", data?.data)
         // return
           if (data?.success && data?.data) {
-              window.alert('Admin Invite Sent, Acceptance Pending')
-            //   queryClient.invalidateQueries("__listById")
-            //   queryClient.refetchQueries()
+            //   window.alert('Admin Invite Sent, Acceptance Pending')
+              toast.success('Admin Invite Sent, Acceptance Pending')
               return
           } else if (data?.data?.error) {
-              // toast.error(data?.data?.error?.message)
-              console.log("In-BoundError:", data?.data?.error)
+            toast.error(data?.data?.error?.response && error?.response?.data?.message
+                ? error?.response?.data?.message
+                : error?.message)
+            //   toast.error(data?.data?.error?.message)
+            //   console.log("In-BoundError:", data?.data?.error)
               return
           } else {
-              // toast.info('something unexpected happened')
+              toast.info('something unexpected happened')
               return
           }
       },
@@ -60,13 +59,13 @@ export function useAdminRecruitStaff() {
               response: { data },
           } = error ?? {}
    
-          // Array.isArray(data?.message)
-          //     ? data?.message?.map((m) => toast.error(m))
-          //     : toast.error(data?.message)
-
           Array.isArray(data?.message)
-              ? data?.message?.map((m) => console.log(m))
-              : console.log(data?.message)
+              ? data?.message?.map((m) => toast.error(m))
+              : toast.error(data?.message)
+
+        //   Array.isArray(data?.message)
+        //       ? data?.message?.map((m) => console.log(m))
+        //       : console.log(data?.message)
       },
   })
 }
@@ -83,14 +82,19 @@ export function useAdminInvitationAcceptance() {
           console.log("ADMIN-ACCEPT-INVITATION-PAYLOAD", data?.data)
         //    return
             if (data?.data?.success && data?.data?.adminuser) {
-                window.alert('Invitation Accepted, Welcome Onboard, Please Log in.')
+                // window.alert('Invitation Accepted, Welcome Onboard, Please Log in.')
+                toast.success('Invitation Accepted, Welcome Onboard, Please Log in.')
                 navigate('/sign-in')
                 return
             } else if (data?.data?.error) {
 
-                console.log("In-BoundError000:", data?.data?.error)
+                // console.log("In-BoundError000:", data?.data?.error)
+                toast.error(data?.data?.error?.response && error?.response?.data?.message
+                    ? error?.response?.data?.message
+                    : error?.message)
+
                 // toast.error(data?.data?.error?.message)
-                console.log("In-BoundError:", data?.data?.error?.message)
+                // console.log("In-BoundError:", data?.data?.error?.message)
                 return
             } else {
                 // toast.info('something unexpected happened')
@@ -103,13 +107,13 @@ export function useAdminInvitationAcceptance() {
                 response: { data },
             } = error ?? {}
      
-            // Array.isArray(data?.message)
-            //     ? data?.message?.map((m) => toast.error(m))
-            //     : toast.error(data?.message)
-  
             Array.isArray(data?.message)
-                ? data?.message?.map((m) => console.log(m))
-                : console.log(data?.message)
+                ? data?.message?.map((m) => toast.error(m))
+                : toast.error(data?.message)
+  
+            // Array.isArray(data?.message)
+            //     ? data?.message?.map((m) => console.log(m))
+            //     : console.log(data?.message)
         },
     })
   }

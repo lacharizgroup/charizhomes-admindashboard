@@ -19,6 +19,7 @@ import ServiceTypesAppConfig from '../main/homes/servicetypes/ServiceTypesAppCon
 import ManagedListingsAppConfig from '../main/homes/managedproperties/ManagedListingsAppConfig';
 import PropertyTypesAppConfig from '../main/homes/propertytypes/PropertyTypesAppConfig';
 import SignAcceptInviteConfig from '../main/sign-accept-invite/SignAcceptInviteConfig';
+import ManagedUserListingsAppConfig from '../main/homes/managedusersandproperties/ManagedUserListingsAppConfig';
 
 const routeConfigs = [
 	SignOutConfig,
@@ -32,6 +33,7 @@ const routeConfigs = [
 	ServiceTypesAppConfig,
 	ManagedListingsAppConfig,
 	PropertyTypesAppConfig,
+	ManagedUserListingsAppConfig,
 
 	
 	/**Routes Below to be disabled */

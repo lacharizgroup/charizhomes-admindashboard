@@ -3,10 +3,6 @@ import homesServerConfig from '../configServerRoutes/homesServerConfig';
 import jwtAuthConfig from 'src/app/auth/services/jwt/jwtAuthConfig';
 
 export const setUserForgotPassCreedStorage = (userForgotPassCredentialsTk) => {
-    console.log("UserForgotPassCredentialsTk TO-SET", userForgotPassCredentialsTk)
-    // Cookie.set(homesServerConfig.studentForgotPassTk, JSON.stringify({ userForgotPassCredentialsTk }))
-
-    // Cookie.set(homesServerConfig.studentForgotPassTk, userForgotPassCredentialsTk)
 
     localStorage.setItem(homesServerConfig.studentForgotPassTk, userForgotPassCredentialsTk)
     
@@ -31,4 +27,25 @@ export const getAdminAccessToken = () => {
 /****LOGGING OUT AN ADMIN USER */
 export const logOutAdminUser = () => {
     return localStorage.removeItem(homesServerConfig.studentForgotPassTk);
+};
+
+
+/****
+ * UNBOARDING AND HANDLING USER STORAGES createNewUserTk
+ */
+
+export function setCreateNewUserAccount(userActivationToken) {
+    
+    localStorage.setItem(homesServerConfig.createNewUserTk, userActivationToken)
+
+    // Cookie.set(homesServerConfig.createNewUserTk, JSON.stringify(userActivationToken))
+}
+
+export const getNewUserAccountToken = () => {
+    return localStorage.getItem(homesServerConfig.createNewUserTk);
+
+
+    // return Cookie.get(homesServerConfig.createNewUserTk);
+
+    
 };

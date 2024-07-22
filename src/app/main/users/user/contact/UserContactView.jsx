@@ -17,7 +17,7 @@ import { useGetContactsItemQuery, useGetContactsCountriesQuery, useGetContactsTa
 /**
  * The contact view.
  */
-function ContactView() {
+function UserContactView() {
 
 	const { data: countries } = useGetContactsCountriesQuery();
 	const { data: tags } = useGetContactsTagsQuery();
@@ -241,4 +241,4 @@ function ContactView() {
 	);
 }
 
-export default ContactView;
+export default UserContactView;

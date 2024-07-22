@@ -6,7 +6,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 /**
  * The contacts sidebar content.
  */
-function ContactsSidebarContent() {
+function StaffContactsSidebarContent() {
 	return (
 		<div className="flex flex-col flex-auto max-w-full w-md">
 			<IconButton
@@ -26,4 +26,4 @@ function ContactsSidebarContent() {
 }
 
 
-export default ContactsSidebarContent;
+export default StaffContactsSidebarContent;
