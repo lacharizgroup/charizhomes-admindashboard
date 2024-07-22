@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import config from './jwtAuthConfig';
 import {  useSnackbar } from 'notistack';
 import Cookie from 'js-cookie'
+import { toast } from 'react-toastify';
 
 const defaultAuthContext = {
 	isAuthenticated: false,
@@ -312,7 +313,9 @@ function JwtAuthProvider(props) {
 
 			if(response.data.error){
 				// enqueueSnackbar(`${response?.data?.error?.message}`)
-				window.alert(`${response?.data?.error?.message}`)
+				// window.alert(`${response?.data?.error?.message}`)
+				toast.error(`${response?.data?.error?.message}`)
+				return
 			}
 
 			// return

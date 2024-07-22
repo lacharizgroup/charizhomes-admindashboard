@@ -16,6 +16,7 @@ import {
  * The product header.
  */
 function ProductHeader() {
+	// const history = useHisto
 	const routeParams = useParams();
 	const { productId } = routeParams;
 	const [createProduct] = useCreateECommerceProductMutation();
@@ -27,6 +28,8 @@ function ProductHeader() {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const { name, images, featuredImageId } = watch();
+
+	
 
 	function handleSaveProduct() {
 		saveProduct(getValues());
@@ -55,9 +58,10 @@ function ProductHeader() {
 				>
 					<Typography
 						className="flex items-center sm:mb-12"
-						component={Link}
+						// component={Link}
+						// to="/property/managed-listings"
+						onClick={() => navigate(-1)}
 						role="button"
-						to="/property/managed-listings"
 						color="inherit"
 					>
 						<FuseSvgIcon size={20}>

@@ -14,11 +14,13 @@ import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Input from '@mui/material/Input';
 import Card from '@mui/material/Card';
+import { charat } from 'stylis';
+import { Link } from 'react-router-dom';
 
 /**
- * The post item.
+ * The post item?.
  */
-function PostItem(props) {
+function PropertyListItem(props) {
 	
 	const { item } = props;
 	return (
@@ -28,7 +30,7 @@ function PostItem(props) {
 				avatar={
 					<Avatar
 						aria-label="Recipe"
-						src={item.user.avatar}
+						src={item?.imageSrc || item?.title?.charAt(0)}
 					/>
 				}
 				action={
@@ -46,54 +48,54 @@ function PostItem(props) {
 							color="secondary.main"
 							paragraph={false}
 						>
-							{item.user.name}
+							{item?.title}
 						</Typography>
 						<span>
-							{item.type === 'post' && 'posted on your timeline'}
-							{item.type === 'something' && 'shared something with you'}
-							{item.type === 'video' && 'shared a video with you'}
-							{item.type === 'article' && 'shared an article with you'}
+							{item?.type === 'post' && 'posted on your timeline'}
+							{item?.type === 'something' && 'shared something with you'}
+							{item?.type === 'video' && 'shared a video with you'}
+							{item?.type === 'article' && 'shared an article with you'}
 						</span>
 					</span>
 				}
-				subheader={item.time}
+				subheader={item?.time}
 			/>
 
 			<CardContent className="px-32">
-				{item.message && (
+				{item?.message && (
 					<Typography
 						component="p"
 						className="mb-16"
 					>
-						{item.message}
+						{item?.message}
 					</Typography>
 				)}
 
-				{item.media && (
+				{item?.imageSrc && (
 					<img
-						src={item.media.preview}
+						src={item?.imageSrc}
 						alt="post"
 						className="rounded-8"
 					/>
 				)}
 
-				{item.article && (
+				{item?.article && (
 					<div className="border-1 rounded-8 overflow-hidden">
 						<img
 							className="w-full border-b-1"
-							src={item.article.media.preview}
+							src={item?.article.media.preview}
 							alt="article"
 						/>
 						<div className="p-16">
-							<Typography variant="subtitle1">{item.article.title}</Typography>
-							<Typography variant="caption">{item.article.subtitle}</Typography>
-							<Typography className="mt-16">{item.article.excerpt}</Typography>
+							<Typography variant="subtitle1">{item?.article.title}</Typography>
+							<Typography variant="caption">{item?.article.subtitle}</Typography>
+							<Typography className="mt-16">{item?.article.excerpt}</Typography>
 						</div>
 					</div>
 				)}
 			</CardContent>
 
-			<CardActions
+			{/* <CardActions
 				disableSpacing
 				className="px-32"
 			>
@@ -108,7 +110,7 @@ function PostItem(props) {
 						heroicons-outline:heart
 					</FuseSvgIcon>
 					<Typography className="mx-4">Like</Typography>
-					<Typography>({item.like})</Typography>
+					<Typography>({item?.like})</Typography>
 				</Button>
 				<Button aria-label="Share">
 					<FuseSvgIcon
@@ -118,9 +120,9 @@ function PostItem(props) {
 						heroicons-outline:share
 					</FuseSvgIcon>
 					<Typography className="mx-4">Share</Typography>
-					<Typography>({item.share})</Typography>
+					<Typography>({item?.share})</Typography>
 				</Button>
-			</CardActions>
+			</CardActions> */}
 
 			<Box
 				className="card-footer flex flex-col px-32 py-24 border-t-1"
@@ -131,10 +133,10 @@ function PostItem(props) {
 							: lighten(theme.palette.background.default, 0.02)
 				}}
 			>
-				{item.comments && item.comments.length > 0 && (
+				{/* {item?.comments && item?.comments.length > 0 && (
 					<div>
 						<div className="flex items-center">
-							<Typography>{item.comments.length} comments</Typography>
+							<Typography>{item?.comments.length} comments</Typography>
 							<FuseSvgIcon
 								size={16}
 								className="mx-4"
@@ -145,7 +147,7 @@ function PostItem(props) {
 						</div>
 
 						<List>
-							{item.comments.map((comment) => (
+							{item?.comments.map((comment) => (
 								<div key={comment.id}>
 									<ListItem className="px-0 -mx-8">
 										<Avatar
@@ -179,15 +181,15 @@ function PostItem(props) {
 							))}
 						</List>
 					</div>
-				)}
+				)} */}
 
 				<div className="flex flex-auto -mx-4">
-					<Avatar
+					{/* <Avatar
 						className="mx-4"
 						src="assets/images/avatars/profile.jpg"
-					/>
+					/> */}
 					<div className="flex flex-col flex-1 mx-4 items-end">
-						<Paper className="w-full mb-16 shadow-0 border-1  overflow-hidden">
+						{/* <Paper className="w-full mb-16 shadow-0 border-1  overflow-hidden">
 							<Input
 								className="p-12 w-full"
 								classes={{ root: 'text-13' }}
@@ -197,14 +199,16 @@ function PostItem(props) {
 								margin="none"
 								disableUnderline
 							/>
-						</Paper>
+						</Paper> */}
 						<div>
 							<Button
+							component={Link}
+							to={`/userlistings/managed-user-listings/${item?.id}/manage`}
 								variant="contained"
 								color="secondary"
 								size="small"
 							>
-								Post comment
+								Manage this listings
 							</Button>
 						</div>
 					</div>
@@ -214,4 +218,4 @@ function PostItem(props) {
 	);
 }
 
-export default PostItem;
+export default PropertyListItem;

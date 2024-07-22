@@ -13,19 +13,14 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import ActivityItem from './ActivityItem';
 import PostItem from './PostItem';
 import { useGetProfileTimelineQuery } from '../../ProfileApi';
-import PropertyListItem from './PropertyListItem';
 
 /**
  * The timeline tab.
  */
-function TimelineTab({listings, loading}) {
-	console.log("Listings proped down", listings)
-	// const { data: timeline, isLoading } = useGetProfileTimelineQuery();
+function TimelineTab() {
+	const { data: timeline, isLoading } = useGetProfileTimelineQuery();
 
-	// if (isLoading) {
-	// 	return <FuseLoading />;
-	// }
-	if (loading) {
+	if (isLoading) {
 		return <FuseLoading />;
 	}
 
@@ -48,7 +43,7 @@ function TimelineTab({listings, loading}) {
 			className="w-full"
 		>
 			<div className="md:flex">
-				{/* <div className="flex flex-col w-full md:w-320 md:ltr:mr-32 md:rtl:ml-32">
+				<div className="flex flex-col w-full md:w-320 md:ltr:mr-32 md:rtl:ml-32">
 					<Card
 						component={motion.div}
 						variants={item}
@@ -76,10 +71,10 @@ function TimelineTab({listings, loading}) {
 							</List>
 						</CardContent>
 					</Card>
-				</div> */}
+				</div>
 
 				<div className="flex flex-col flex-1">
-					{/* <Card
+					<Card
 						component={motion.div}
 						variants={item}
 						className="w-full overflow-hidden w-full mb-32"
@@ -123,27 +118,16 @@ function TimelineTab({listings, loading}) {
 								>
 									Post
 								</Button>
-							</div> 
+							</div>
 						</Box>
-					</Card> */}
+					</Card>
 
-					{/* {timeline.posts.map((post) => (
+					{timeline.posts.map((post) => (
 						<motion.div
 							variants={item}
 							key={post.id}
 						>
 							<PostItem item={post} />
-
-						</motion.div>
-					))} */}
-
-{listings?.map((post) => (
-						<motion.div
-							variants={item}
-							key={post.id}
-						>
-							<PropertyListItem item={post} />
-
 						</motion.div>
 					))}
 				</div>

@@ -118,6 +118,17 @@ export const getAllUsers = () =>  {
   return AuthApi().get(`${homesServerConfig.getAllUsers}`)
 };
 
+/**Get a single user data */
+export const getSingleUserAndListings = (userId) =>  {
+  console.log("Getting Single-User-DATA", userId)
+  return AuthApi().get(`${homesServerConfig.getAllUsers}/${userId}`)
+};
+
+
+
+/***
+ * Handle ADMIN-USERS: Get All Users on Homes
+ */
 //Recruit new Admins
 export const andminCreateNewUserEndpoint = (newUserData) =>  {
   // console.log("Recruit DATA", newUserData)

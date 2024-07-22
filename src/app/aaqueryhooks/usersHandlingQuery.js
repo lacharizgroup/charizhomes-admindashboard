@@ -1,7 +1,7 @@
 
 import { useMutation, useQuery } from 'react-query';
 import config from './configServerRoutes/homesServerConfig';
-import { andminActivateNewUserEndpoint, andminCreateNewUserEndpoint, getAllUsers, userForgotPassword, userResetPasswordWithCode } from './routestoserver';
+import { andminActivateNewUserEndpoint, andminCreateNewUserEndpoint, getAllUsers, getSingleUserAndListings, userForgotPassword, userResetPasswordWithCode } from './routestoserver';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
@@ -14,7 +14,19 @@ export default function useGetAllUsers() {
   return useQuery(['__getAllUsers'], getAllUsers)
 }
 
-
+/***Get USER By  ID */
+export function useGetUserDataById(params) {
+  return useQuery(
+      ['__getAllUsers', params],
+      () => getSingleUserAndListings(params),
+      {
+      
+          enabled: Boolean(params) ,
+          //|| Boolean(params !== 'new')
+          // staleTime: 5000,
+      }
+  )
+}
 
 /***Recruite New User Accounts */
 export function useAdminCreateNewUser() {
