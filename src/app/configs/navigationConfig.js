@@ -75,13 +75,6 @@ const navigationConfig = [
 				icon: 'heroicons-outline:clipboard-check',
 				url: '/users/user'
 			},
-			// {
-			// 	id: 'users.vendors',
-			// 	title: 'Property Managers',
-			// 	type: 'item',
-			// 	icon: 'heroicons-outline:clipboard-check',
-			// 	url: '/users/vendors'
-			// },
 			
 		]
 	},
