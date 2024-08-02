@@ -34,7 +34,8 @@ export function useAdminCreateNewUser() {
   return useMutation(andminCreateNewUserEndpoint, {
       onSuccess: (data) => {
         console.log("User-INVITATION-PAYLOAD", data?.data)
-        // return
+        // return activation_token
+        
           if (data?.data?.success && data?.data?.activation_token) {
             setCreateNewUserAccount(data?.data?.activation_token)
             navigate('/users/user/authorize/activate')

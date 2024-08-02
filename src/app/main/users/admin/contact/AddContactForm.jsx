@@ -30,7 +30,7 @@ import {
 import ContactModel from '../models/ContactModel';
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useAdminRecruitStaff } from 'src/app/aaqueryhooks/adminHandlingQuery';
+import { useAdminRecruitStaff, useGetAdminById } from 'src/app/aaqueryhooks/adminHandlingQuery';
 // import InputAdornment from '@mui/material/InputAdornment';
 // import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 // import { useGetAdminById } from 'src/app/aaqueryhooks/adminHandlingQuery';
@@ -109,6 +109,7 @@ export const roleset = [
 	
   ];
 
+
 function AddContactForm() {
 
 	const generateSingleOptions = () => {
@@ -138,7 +139,7 @@ function AddContactForm() {
 	// } = useGetAdminById(id, {
 	// 	skip: !id || id === 'new'
 	// });
-
+// console.log("Single-Admin-Contact", admin?.data)
 	const recruitStaff =  useAdminRecruitStaff()
 
 	const { control, watch, reset, handleSubmit, formState } = useForm({
@@ -332,7 +333,7 @@ function AddContactForm() {
 
 				<Controller
         control={control}
-        name="role"
+        name={`role`}
         //: { onChange, value }
         render={({ field}) => (
           <Select

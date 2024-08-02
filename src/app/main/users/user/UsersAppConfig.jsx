@@ -17,6 +17,7 @@ const UsersAppConfig = {
 		}
 	},
 	// auth: authRoles.admin,
+	
 	routes: [
 
 		{

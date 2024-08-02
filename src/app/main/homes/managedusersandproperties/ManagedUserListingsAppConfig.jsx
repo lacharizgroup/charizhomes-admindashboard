@@ -18,6 +18,7 @@ const ManagedUserListingsAppConfig = {
 	settings: {
 		layout: {}
 	},
+
 	routes: [
 		{
 			path: 'userlistings',
@@ -48,6 +49,7 @@ const ManagedUserListingsAppConfig = {
 					element: <PropertyProfileApp />
 				},
 
+				
 				{
 					path: 'managed-user-listings/:productId/*',
 					element: <PropertyListing />

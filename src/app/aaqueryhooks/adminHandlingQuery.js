@@ -32,15 +32,16 @@ export function useGetAdminById(params) {
 /***Recruite New Admins */
 export function useAdminRecruitStaff() {
  
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 //   const queryClient = useQueryClient()
   return useMutation(recruitAdminUserEndpoint, {
       onSuccess: (data) => {
         console.log("ADMIN-INVITATION-PAYLOAD", data?.data)
         // return
-          if (data?.success && data?.data) {
+          if (data?.data?.success && data?.data?.activation_token) {
             //   window.alert('Admin Invite Sent, Acceptance Pending')
               toast.success('Admin Invite Sent, Acceptance Pending')
+              navigate('/users/admin')
               return
           } else if (data?.data?.error) {
             toast.error(data?.data?.error?.response && error?.response?.data?.message

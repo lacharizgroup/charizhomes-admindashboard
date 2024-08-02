@@ -35,7 +35,7 @@ export function AuthApi() {
   // const TOKEN = JSON.parse(Cookies.get('authClientUserToken')); getAdminAccessToken
   const  token  = getAdminAccessToken();
 
-  console.log("ACCESS__TOKEN", token)
+  // console.log("ACCESS__TOKEN", token)
   // const { signOut } = UseJwtAuth();
 
   const Api = axios.create({
@@ -152,6 +152,7 @@ export const getAllAdminsRoutes = () =>  {
 
 //get single admin
 export const getSingleAdminUser = (adminId) =>  {
+
   return AuthApi().get(`${homesServerConfig.getAllAdmins}/${adminId}`)
 };
 

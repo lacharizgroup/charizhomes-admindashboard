@@ -34,6 +34,7 @@ const StaffAppConfig = {
 				{
 					path: ':id/edit',
 					element: <ContactForm />
+		
 				},
 
 				
@@ -41,6 +42,7 @@ const StaffAppConfig = {
 				// 	path: 'operate/:productId/*',
 				// 	element: <PropertyType />
 				// },
+
 
 			]
 		}

@@ -92,14 +92,15 @@ function PropertyListing() {
 					className="mt-24"
 					component={Link}
 					variant="outlined"
-					to="/apps/e-commerce/products"
+					to="/userlistings/managed-user-listings"
 					color="inherit"
 				>
-					Go to Products Page
+					Go to Listings Page
 				</Button>
 			</motion.div>
 		);
 	}
+
 
 	/**
 	 * Wait while product data is loading and form is setted
