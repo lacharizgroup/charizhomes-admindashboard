@@ -215,25 +215,6 @@ function JwtAuthProvider(props) {
 
 			const accessToken = getAccessToken();
 
-			// if (isTokenValid(accessToken)) {
-			// 	try {
-			// 		setIsLoading(true);
-			// 		const response = await axios.get(config.getUserUrl, {
-			// 			headers: { Authorization: `Bearer ${accessToken}` }
-			// 		});
-			// 		const userData = response?.data;
-			// 		handleSignInSuccess(userData, accessToken);
-			// 		return true;
-			// 	} catch (error) {
-			// 		const axiosError = error;
-			// 		handleSignInFailure(axiosError);
-			// 		return false;
-			// 	}
-			// } else {
-			// 	resetSession();
-			// 	return false;
-			// }
-
 			if (isTokenValid(accessToken)) {
 				try {
 					setIsLoading(true);
@@ -245,15 +226,14 @@ function JwtAuthProvider(props) {
 						name:response?.data?.user?.name,
 						email:response?.data?.user?.email,
 						role:response?.data?.user?.role.toLowerCase(),
-						// name:response?.data?.user?.name,
-						// name:response?.data?.user?.name,
 					}
-					// const userData = transFormedUser;
-					// console.log("GETING-AUTHENTICATED-USER", userData)
 					handleSignInSuccess(transFormedUser, accessToken);
 					return true;
 				} catch (error) {
 					const axiosError = error;
+					toast.error(error?.response && error?.response?.data?.message
+						? error?.response?.data?.message
+						: error?.message)
 					handleSignInFailure(axiosError);
 					return false;
 				}
@@ -287,7 +267,6 @@ function JwtAuthProvider(props) {
 		//  handleFailure,
 		handleSignInFailure
 		 ) => {
-			// const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 		try {
 
 			
@@ -302,38 +281,23 @@ function JwtAuthProvider(props) {
 					name:response?.data?.user?.name,
 					email:response?.data?.user?.email,
 					role:response?.data?.user?.role.toLowerCase(),
-					// name:response?.data?.user?.name,
-					// name:response?.data?.user?.name,
 				}
 
-				// const userData = transFormedUser;
 				const accessToken = response?.data?.accessToken;
 				handleSignInSuccess(transFormedUser, accessToken);
 			return transFormedUser;
 			}
 
 			if(response.data.error){
-				// enqueueSnackbar(`${response?.data?.error?.message}`)
-				// window.alert(`${response?.data?.error?.message}`)
-
 				console.log("Error from LogIn", response.data.error)
 				toast.error(`${response?.data?.error?.message}`)
 
-				
-
+				// toast.error(response.data.error && response.data.error?.message
+				// 	? error?.response?.data?.message
+				// 	: error?.message)
 				return
 
 			}
-
-
-			// return
-			
-
-			// console.log("Request-SUCESS", response.data) accessToken
-			// console.log("Request-SUCESS User", userData)
-			// console.log("Request-SUCESS TOKEN", accessToken)
-			//handleSignInSuccess
-			// handleSuccess(userData, accessToken);
 			
 		} catch (error) {
 			const axiosError = error;
