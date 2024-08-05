@@ -291,6 +291,7 @@ function JwtAuthProvider(props) {
 		try {
 
 			
+
 			const response = await axios.post(url, data);
 
 			console.log("Request-SUCESS User", response)
@@ -314,9 +315,16 @@ function JwtAuthProvider(props) {
 			if(response.data.error){
 				// enqueueSnackbar(`${response?.data?.error?.message}`)
 				// window.alert(`${response?.data?.error?.message}`)
+
+				console.log("Error from LogIn", response.data.error)
 				toast.error(`${response?.data?.error?.message}`)
+
+				
+
 				return
+
 			}
+
 
 			// return
 			
@@ -329,7 +337,10 @@ function JwtAuthProvider(props) {
 			
 		} catch (error) {
 			const axiosError = error;
-			console.log("Request-Error", error)
+			toast.error(error?.response && error?.response?.data?.message
+				? error?.response?.data?.message
+				: error?.message)
+			// console.log("Request-Error", error)
 
 			// return
 			//handleSignInFailure
